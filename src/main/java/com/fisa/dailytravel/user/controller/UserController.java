@@ -25,10 +25,9 @@ public class UserController {
         userCreateRequest.setEmail(email);
         userCreateRequest.setUuid(principal.getName());
         userCreateRequest.setPicture(picture);
-        userService.signin(userCreateRequest);
+        UserCreateResponse userCreateResponse = userService.signin(userCreateRequest);
 
-        UserCreateResponse response = new UserCreateResponse("User created successfully");
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(userCreateResponse.getStatus()).body(userCreateResponse);
     }
 
     @GetMapping("/v1/user")

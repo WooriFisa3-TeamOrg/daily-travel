@@ -7,6 +7,7 @@ import com.fisa.dailytravel.post.models.Image;
 import com.fisa.dailytravel.post.models.Post;
 import com.fisa.dailytravel.post.repository.PostRepository;
 import com.fisa.dailytravel.user.dto.UserCreateRequest;
+import com.fisa.dailytravel.user.dto.UserCreateResponse;
 import com.fisa.dailytravel.user.dto.UserGetResponse;
 import com.fisa.dailytravel.user.dto.UserUpdateRequest;
 import com.fisa.dailytravel.user.dto.UserUpdateResponse;
@@ -16,6 +17,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void signin(UserCreateRequest userCreateRequest) throws Exception {
+    public UserCreateResponse signin(UserCreateRequest userCreateRequest) throws Exception {
         User user = userRepository.findByUuid(userCreateRequest.getUuid());
         Optional<User> userOptional = Optional.ofNullable(user);
 
@@ -48,9 +50,18 @@ public class UserServiceImpl implements UserService {
             user.setEmail(userCreateRequest.getEmail());
             user.setProfileImagePath(userCreateRequest.getPicture());
             user.setIsDeleted(false);
+            userRepository.save(user);
+            return UserCreateResponse.builder()
+                    .status(HttpStatus.CREATED)
+                    .message("User created successfully")
+                    .build();
         }
 
-        userRepository.save(user);
+        return UserCreateResponse.builder()
+                .status(HttpStatus.OK)
+                .message("User signed in successfully")
+                .build();
+
     }
 
     @Transactional

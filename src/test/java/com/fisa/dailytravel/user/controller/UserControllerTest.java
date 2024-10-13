@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -46,7 +47,10 @@ class UserControllerTest {
 
     @Test
     void testSignin() throws Exception {
-        UserCreateResponse userCreateResponse = new UserCreateResponse("User created successfully");
+        UserCreateResponse userCreateResponse =  UserCreateResponse.builder()
+                .status(HttpStatus.CREATED)
+                .message("User created successfully")
+                .build();
 
         mockMvc.perform(post("/v1/user")
                         .principal(jwtAuthenticationToken)
