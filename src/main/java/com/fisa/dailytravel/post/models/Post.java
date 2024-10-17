@@ -13,6 +13,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PostPersist;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -34,7 +36,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "id")
-@Table(name = "post")
+@Table(name = "posts")
 @Entity
 public class Post {
     @Id
@@ -57,18 +59,18 @@ public class Post {
 
     @Column(name = "thumbnail")
     private String thumbnail;
+//
+//    @Column(name = "latitude", columnDefinition = "NUMBER(9, 6)")
+//    private Double latitude;
+//
+//    @Column(name = "longitude", columnDefinition = "NUMBER(9, 6)")
+//    private Double longitude;
 
-    @Column(name = "latitude", columnDefinition = "NUMBER(9, 6)")
-    private Double latitude;
-
-    @Column(name = "longitude", columnDefinition = "NUMBER(9, 6)")
-    private Double longitude;
-
-    @Column(name = "created_at", insertable = false, updatable = false, nullable = false)
+    @Column(name = "created_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = false)
+    @Column(name = "updated_at")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
 
@@ -87,4 +89,15 @@ public class Post {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PostHashtag> postHashtags = new HashSet<>();
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PostPersist
+    public void postPersist() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }

@@ -27,8 +27,6 @@ public class PostResponse {
     private int likesCount;
     private String thumbnail;
     private List<String> images;
-    private Double latitude;
-    private Double longitude;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime creationDate;
     private List<String> hashtags;
@@ -46,8 +44,6 @@ public class PostResponse {
                 .likesCount(post.getLikesCount())
                 .thumbnail(post.getThumbnail())
                 .images(imageFiles)
-                .latitude(post.getLatitude())
-                .longitude(post.getLongitude())
                 .hashtags(hashtags)
                 .creationDate(post.getCreatedAt())
                 .comments(comments)

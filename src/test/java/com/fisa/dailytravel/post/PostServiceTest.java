@@ -23,7 +23,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
@@ -48,8 +48,6 @@ public class PostServiceTest {
                     .placeName("Place " + i)
                     .likesCount(0)
                     .thumbnail("thumbnail" + i + ".jpg")
-                    .latitude(Math.random() * 180 - 90)  // 예시 좌표
-                    .longitude(Math.random() * 360 - 180)  // 예시 좌표
                     .user(userRepository.findByUuid("115521364043265380969"))  // 예시 사용자
                     .build();
             postRepository.save(post);
