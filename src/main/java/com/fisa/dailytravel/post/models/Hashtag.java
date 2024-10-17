@@ -25,7 +25,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "id")
-@Table(name = "hashtag")
+@Table(name = "hashtags")
 @Entity
 public class Hashtag {
     @Id

@@ -55,7 +55,7 @@ public class Post {
     private String placeName;
 
     @Column(name = "likes_count")
-    private int likesCount;
+    private int likesCount = 0;
 
     @Column(name = "thumbnail")
     private String thumbnail;

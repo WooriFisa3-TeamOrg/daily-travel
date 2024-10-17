@@ -22,7 +22,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = {"post", "hashtag"})
-@Table(name = "post_hashtag")
+@Table(name = "post_hashtags")
 @Entity
 public class PostHashtag {
     @Id

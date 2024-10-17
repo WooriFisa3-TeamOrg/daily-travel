@@ -22,7 +22,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "id")
-@Table(name = "image")
+@Table(name = "images")
 @Entity
 public class Image {
     @Id
