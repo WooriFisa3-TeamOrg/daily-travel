@@ -27,7 +27,7 @@ import lombok.Setter;
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "image_seq")
-    @SequenceGenerator(name = "image_seq", sequenceName = "image_seq", allocationSize = 10)
+    @SequenceGenerator(name = "image_seq", sequenceName = "images_image_id_seq", allocationSize = 1)
     @Column(name = "image_id")
     private Long id;
 

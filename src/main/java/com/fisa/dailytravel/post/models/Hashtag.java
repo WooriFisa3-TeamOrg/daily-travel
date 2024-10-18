@@ -30,7 +30,7 @@ import java.util.Set;
 public class Hashtag {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hashtag_seq")
-    @SequenceGenerator(name = "hashtag_seq", sequenceName = "hashtag_seq", allocationSize = 10)
+    @SequenceGenerator(name = "hashtag_seq", sequenceName = "hashtags_hashtag_id_seq", allocationSize = 1)
     @Column(name = "hashtag_id")
     private Long id;
 

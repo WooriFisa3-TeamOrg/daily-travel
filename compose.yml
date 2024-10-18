@@ -16,14 +16,13 @@ services:
     #    volumes:
     #      - oracle-data:/opt/oracle/oradata
     postgres:
-        image: 'postgres:latest'
+        image: 'cajhyung/postgresql:16.4'
         environment:
             - 'POSTGRES_DB=test'
             - 'POSTGRES_PASSWORD=test'
             - 'POSTGRES_USER=test'
         ports:
             - '5432:5432'
-    
     redis:
         image: redis:latest
         ports:

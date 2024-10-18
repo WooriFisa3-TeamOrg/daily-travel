@@ -1,7 +1,8 @@
 package com.fisa.dailytravel.comment.models;
 
-import java.time.LocalDateTime;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fisa.dailytravel.post.models.Post;
+import com.fisa.dailytravel.user.models.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,11 +12,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fisa.dailytravel.post.models.Post;
-import com.fisa.dailytravel.user.models.User;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -23,6 +19,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -36,7 +34,7 @@ import lombok.ToString;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comments_seq")
-    @SequenceGenerator(name = "comments_seq", sequenceName = "comments_seq", allocationSize = 1)
+    @SequenceGenerator(name = "comments_seq", sequenceName = "comments_comments_id_seq", allocationSize = 1)
     @Column(name = "comments_id")
     private Long id;
 
